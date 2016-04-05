@@ -2,13 +2,124 @@
 <html>
 <head>
 <script src='popup.js'></script>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<style type="text/css">
+body{
+  width: 400px;
+  font-family: "Roboto", 'Helvetica Neue, Helvetica, Arial';
+  
+}  
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0; 
+}
 
+}
+article{
+  margin-top: -10px;
+  padding: 8px;
+}
+.eleven{
+  margin-top: -5px;
+}
+.eleven p{
+
+  font-size: 1.3em;
+  font-weight:300;
+  text-transform:uppercase;
+  letter-spacing: -0.08em;
+  color: #636363;
+}
+.component{
+  margin: 8px 0;
+}
+.subcomponent {
+ margin-bottom: 5px; 
+ margin-right: 5px; 
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.container{
+  max-height: 200px;
+  overflow-y: scroll;
+}
+input[type=text], select {
+    width: 100%;
+    padding: 9px 14px;
+    margin: 8px 0;
+    display: inline-block;
+    border: none;
+    border: 1px solid #ccc;
+    
+    box-sizing: border-box;
+}
+#clear {
+    width: 100%;
+    background-color: #EC7777;
+    color: white;
+    padding: 9px 14px;
+    
+    border: none;
+    
+    cursor: pointer;
+}
+#submit {
+    width: 100%;
+    background-color: #8DEC77;
+    color: white;
+    padding: 9px 14px;
+    
+    border: none;
+    
+    cursor: pointer;
+}
+.action{
+   
+    border: none;
+    color: white;
+    padding: 5px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.play{
+  background-color: #4CAF50; /* Green */
+}
+.remove{
+  background-color: #EC7777; /* Green */
+}
+</style>
 </head>
-<body style="width:350px;">
-<input type="text" id="input_title"  />
-<input type="text" id="input_url"  />
-<button id="submit">Submit</button>
-<button id="clear">Clear</button>
-<table id="table_list"></table>
+
+<article class="eleven">
+    <p>Favourite Audio</p>
+  </article>
+<hr/>
+
+<input type="text" id="input_title" class="subcomponent"  />
+<input type="text" id="input_url" class="subcomponent"  />
+<button id="submit" class="subcomponent">Add</button>
+
+<div class="container component"><table id="table_list"></table></div>
+
+<div class="component">
+  <button id="clear" class="subcomponent">Clear</button>
+</div> 
 </body>
 </html>

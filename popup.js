@@ -111,7 +111,8 @@ function fillRow(row, rowData, index){
   cell_title.innerHTML = rowData.title;
   
   var buttonPlay = document.createElement('button');
-  buttonPlay.innerText = "Play";
+  buttonPlay.className = "action play";
+  buttonPlay.innerText = ">";
 
   var audio = new Audio(rowData.url);
   buttonPlay.onclick = function(){
@@ -121,7 +122,8 @@ function fillRow(row, rowData, index){
   cell_url.appendChild(buttonPlay);
 
   var buttonRemove = document.createElement('button');
-  buttonRemove.innerText = "Remove";
+  buttonRemove.className = "action remove";
+  buttonRemove.innerText = "x";
   buttonRemove.onclick = function(){
 
       removeItem(index);
