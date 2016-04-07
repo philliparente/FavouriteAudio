@@ -15,7 +15,7 @@ Chrome extension to favourite audios
 5. Submit a pull request :D
 
 ## TODO
-- [] Add button *stop* to player
-- [] Align title and player on table
-- [] Add test cases
-- [] Change project icon
+- [ ] Add button *stop* to player
+- [ ] Align title and player on table
+- [ ] Add test cases
+- [ ] Change project icon
