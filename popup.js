@@ -20,14 +20,14 @@ function saveItem(title, url, callback){
       storage.set({favourite_audios: data.favourite_audios}, function(){
 
         callback(data.favourite_audios);
-      });  
+      });
     });
 
-    
+
 }
 
 function getCurrentTabUrl(callback) {
- 
+
   var queryInfo = {
     active: true,
     currentWindow: true
@@ -36,36 +36,36 @@ function getCurrentTabUrl(callback) {
   chrome.tabs.query(queryInfo, function(tabs) {
     var tab = tabs[0];
     var url = tab.url;
-    
+
     callback(url);
   });
 }
 
 function removeItem(index){
   storage.get({favourite_audios: {list: []}}, function(data){
-    
+
     data.favourite_audios.list.splice(index, 1);
     storage.set({favourite_audios: data.favourite_audios}, function(){
       updateTable(data.favourite_audios);
     });
-        
-    
+
+
   });
 }
 
 
-chrome.runtime.onMessage.addListener(function(request, sender) {  
+chrome.runtime.onMessage.addListener(function(request, sender) {
   if (request.action == "getSource") {
 
     getCurrentTabUrl(function(url){
       var title = titlePattern.exec(request.source);
-      
+
       var audioUrl = audioPattern.exec(request.source);
 
       if(audioUrl){
-        audioUrl = audioUrl[1];        
+        audioUrl = audioUrl[1];
         processedAudioUrl = urlPattern.exec(audioUrl);
-        
+
         var tabUrl = urlPattern.exec(url);
         if (!processedAudioUrl){
           tabUrl
@@ -76,25 +76,25 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
           fullUrl = scheme + "://" + domain+audioUrl;
         }else{
           fullUrl = processedAudioUrl[2] + "://" + processedAudioUrl[3] + audioUrl;
-        }   
+        }
 
         var url = document.querySelector('#input_url');
-        url.value = fullUrl;     
+        url.value = fullUrl;
       }
 
-      
-      
+
+
 
       if (title){
           title = title[1];
           var title_input = document.querySelector('#input_title');
           title_input.value = title;
       }
-      
+
     });
 
-    
-    
+
+
   }
 });
 
@@ -109,14 +109,14 @@ function fillRow(row, rowData, index){
   var cell_remove = row.insertCell(2);
 
   cell_title.innerHTML = rowData.title;
-  
+
   var buttonPlay = document.createElement('button');
   buttonPlay.className = "action play";
   buttonPlay.innerText = ">";
 
   var audio = new Audio(rowData.url);
   buttonPlay.onclick = function(){
-    
+
     audio.play();
   }
   cell_url.appendChild(buttonPlay);
@@ -134,21 +134,21 @@ function fillRow(row, rowData, index){
 function updateTable(data){
   var table = document.querySelector("#table_list");
   cleanTable(table);
-  
+
   for (var i = 0; i < data.list.length; i++) {
     var row = table.insertRow(i);
     fillRow(row, data.list[i], i);
-    
+
   }
-  
+
 }
 
 
 function onWindowLoad() {
-  
+
   var title = document.querySelector('#input_title');
   var url = document.querySelector('#input_url');
-  
+
 
   storage.get({favourite_audios: {list: []}}, function(data){
     updateTable(data.favourite_audios);
@@ -159,14 +159,14 @@ function onWindowLoad() {
     saveItem(title.value, url.value, function(data){
       updateTable(data);
     });
-    
+
   }
 
   document.getElementById('clear').onclick= function() {
     clear();
   }
 
-  
+
   chrome.tabs.executeScript(null, {
     file: "getPagesSource.js"
   }, function() {
