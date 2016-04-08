@@ -110,16 +110,15 @@ function fillRow(row, rowData, index){
 
   cell_title.innerHTML = rowData.title;
 
-  var buttonPlay = document.createElement('button');
-  buttonPlay.className = "action play";
-  buttonPlay.innerText = ">";
-
+  var audioPlayer = document.createElement('audio');
+  audioPlayer.controls = true;
+  var audioPlayerSource = document.createElement("source");
+  audioPlayerSource.src = rowData.url;
+  audioPlayer.appendChild(audioPlayerSource)
+  
   var audio = new Audio(rowData.url);
-  buttonPlay.onclick = function(){
-
-    audio.play();
-  }
-  cell_url.appendChild(buttonPlay);
+  
+  cell_url.appendChild(audioPlayer);
 
   var buttonRemove = document.createElement('button');
   buttonRemove.className = "action remove";
